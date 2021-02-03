@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, height=device-height" />
-    <title>Title</title>
+    <title>Retro-Pokedex</title>
     <link rel="stylesheet" href="./css/CoveoFullSearch.css" />
     <link rel="stylesheet" href="./css/coveoextension.css" />
     <script src="js/CoveoJsSearch.Lazy.js"></script>
     <script src="js/coveo.extension.js"></script>
     <script src="js/templates/templates.js"></script>
     <script src="../config.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         Coveo.SearchEndpoint.configureCloudV2Endpoint(
@@ -19,14 +23,33 @@
         Coveo.init(document.body);
       });
     </script>
+    <style>
+      html {
+        background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ba4f3435-f426-4149-a8c5-2d8ed1d01a0b/d9de59i-3025395e-45e2-492b-8876-d801e1bcff09.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYmE0ZjM0MzUtZjQyNi00MTQ5LWE4YzUtMmQ4ZWQxZDAxYTBiXC9kOWRlNTlpLTMwMjUzOTVlLTQ1ZTItNDkyYi04ODc2LWQ4MDFlMWJjZmYwOS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.CXi_yL7hjCmr8OU9onTA0BNzdqN0-QZwxhi2S0j05iU);
+        background-repeat: repeat;
+      }
+      .center-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .center-text {
+        text-align: center;
+      }
+    </style>
   </head>
   <body id="search" class="CoveoSearchInterface" data-enable-history="true">
-    <div class="coveo-tab-section">
-      <a class="CoveoTab" data-id="All" data-caption="Pokemon"></a>
-    </div>
+    <img
+      src="https://data.whicdn.com/images/129015252/original.gif"
+      class="center-image"
+    />
     <div class="coveo-search-section">
-      <div class="CoveoSettings"></div>
-      <div class="CoveoSearchbox" data-enable-omnibox="true"></div>
+      <div class="CoveoSettings" style="background-color: white"></div>
+      <div
+        class="CoveoSearchbox"
+        data-enable-omnibox="true"
+        style="background-color: white"
+      ></div>
     </div>
     <div class="coveo-main-section">
       <div class="coveo-facet-column">
@@ -35,18 +58,21 @@
           data-title="Generation"
           data-field="@generation"
           data-tab="All"
+          data-enable-toggling-operator="true"
         ></div>
         <div
           class="CoveoFacet"
           data-title="Specie"
           data-field="@specie"
           data-tab="All"
+          data-enable-toggling-operator="true"
         ></div>
         <div
           class="CoveoFacet"
           data-title="Types"
           data-field="@types"
           data-tab="All"
+          data-enable-toggling-operator="true"
         ></div>
         <div
           class="CoveoFacetSlider"
@@ -110,16 +136,16 @@
           <div class="CoveoResultsPreferences"></div>
           <div class="CoveoResultsFiltersPreferences"></div>
         </div>
-        <div class="CoveoBreadcrumb"></div>
+        <div class="CoveoBreadcrumb" style="background-color: white"></div>
         <div class="coveo-results-header">
-          <div class="coveo-summary-section">
+          <div class="coveo-summary-section" style="background-color: white">
             <span class="CoveoQuerySummary"></span>
             <span class="CoveoQueryDuration"></span>
           </div>
           <div class="coveo-result-layout-section">
             <span class="CoveoResultLayout"></span>
           </div>
-          <div class="coveo-sort-section">
+          <div class="coveo-sort-section" style="background-color: white">
             <span
               class="CoveoSort"
               data-sort-criteria="relevancy"
@@ -137,19 +163,52 @@
         <div class="CoveoErrorReport"></div>
         <div
           class="CoveoResultList"
-          data-layout="list"
-          data-wait-animation="fade"
-          data-auto-select-fields-to-include="true"
-        ></div>
-        <div
-          class="CoveoResultList"
           data-layout="card"
           data-wait-animation="fade"
           data-auto-select-fields-to-include="true"
-        ></div>
-        <div class="CoveoPager"></div>
-        <div class="CoveoLogo"></div>
-        <div class="CoveoResultsPerPage"></div>
+        >
+          <script
+            type="text/underscore"
+            class="result-template"
+            type="text/html"
+          >
+            <div class="coveo-result-frame" style="background-color: white;">
+              <img
+                src="<%- raw.picture_url %>"
+                width="128"
+                height="128"
+                onclick="window.open('<%- ClickUri %>', '_blank');"
+                class="center-image"
+              />
+              <div class="coveo-result-row center-image">
+                <div class="coveo-result-cell">
+                  <p class="center-text"><%- raw.name %></p>
+                  <p class="center-text">#<%- raw.number %></p>
+                  <p class="center-text">
+                    <%- (raw.types).replace(';', ' & ') %>
+                  </p>
+                  <p class="center-text">
+                    <i class="fa fa-paw"></i>&nbsp<%- raw.specie %>
+                  </p>
+                  <p class="center-text">
+                    <i class="fa fa-heart"></i>&nbsp<%- raw.hp %> -
+                    <i class="fa fa-bolt"></i>&nbsp<%- raw.attack %> -
+                    <i class="fa fa-shield"></i>&nbsp<%- raw.defense %> -
+                    <i class="fa fa-rocket"></i>&nbsp<%- raw.speed %>
+                  </p>
+                </div>
+              </div>
+              <div class="coveo-result-cell">
+                <a class="CoveoResultLink"></a>
+              </div>
+              <div class="CoveoCardActionBar">
+                <div class="CoveoQuickview"></div>
+              </div>
+            </div>
+          </script>
+        </div>
+        <div class="CoveoPager" style="background-color: white"></div>
+        <div class="CoveoResultsPerPage" style="background-color: white"></div>
       </div>
     </div>
   </body>

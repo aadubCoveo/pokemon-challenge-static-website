@@ -14,7 +14,7 @@ var CoveoExtension =
 /******/ 	function hotDownloadUpdateChunk(chunkId) {
 /******/ 		var script = document.createElement("script");
 /******/ 		script.charset = "utf-8";
-/******/ 		script.src = __webpack_require__.p + "254964d-" + chunkId + "-wps-hmr.js";
+/******/ 		script.src = __webpack_require__.p + "6ae6a69-" + chunkId + "-wps-hmr.js";
 /******/ 		if (null) script.crossOrigin = null;
 /******/ 		document.head.appendChild(script);
 /******/ 	}
@@ -28,7 +28,7 @@ var CoveoExtension =
 /******/ 			}
 /******/ 			try {
 /******/ 				var request = new XMLHttpRequest();
-/******/ 				var requestPath = __webpack_require__.p + "254964d-wps-hmr.json";
+/******/ 				var requestPath = __webpack_require__.p + "6ae6a69-wps-hmr.json";
 /******/ 				request.open("GET", requestPath, true);
 /******/ 				request.timeout = requestTimeout;
 /******/ 				request.send(null);
@@ -64,7 +64,7 @@ var CoveoExtension =
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0bf74e8420261799c322";
+/******/ 	var hotCurrentHash = "8967196e9c7a5ee407aa";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
