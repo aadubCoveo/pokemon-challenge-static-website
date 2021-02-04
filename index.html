@@ -14,6 +14,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         Coveo.SearchEndpoint.configureCloudV2Endpoint(
@@ -35,6 +40,25 @@
       }
       .center-text {
         text-align: center;
+      }
+      * {
+        font-family: "Press Start 2P", cursive;
+        font-size: 10px;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+          1px 1px 0 #000;
+        color: #00ff00;
+      }
+      .poke-dot {
+        border: dotted 10px;
+        border-color: #263e55;
+      }
+      rect {
+        fill: #ff00ff !important;
+      }
+      .coveo-facet-header-title {
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+          1px 1px 0 #000 !important;
+        color: #00ff00 !important;
       }
     </style>
   </head>
@@ -61,6 +85,7 @@
           data-field="@generation"
           data-tab="All"
           data-enable-toggling-operator="true"
+          style="background-color: #ff00ff"
         ></div>
         <div
           class="CoveoFacet"
@@ -68,6 +93,7 @@
           data-field="@specie"
           data-tab="All"
           data-enable-toggling-operator="true"
+          style="background-color: #ff00ff"
         ></div>
         <div
           class="CoveoFacet"
@@ -75,6 +101,7 @@
           data-field="@types"
           data-tab="All"
           data-enable-toggling-operator="true"
+          style="background-color: #ff00ff"
         ></div>
         <div
           class="CoveoFacetSlider"
@@ -174,7 +201,10 @@
             class="result-template"
             type="text/html"
           >
-            <div class="coveo-result-frame" style="background-color: white;">
+            <div
+              class="coveo-result-frame poke-dot"
+              style="background-color: #ff00ff;"
+            >
               <img
                 src="<%- raw.picture_url %>"
                 width="128"
@@ -199,9 +229,6 @@
                     <i class="fa fa-rocket"></i>&nbsp<%- raw.speed %>
                   </p>
                 </div>
-              </div>
-              <div class="coveo-result-cell">
-                <a class="CoveoResultLink"></a>
               </div>
               <div class="CoveoCardActionBar">
                 <div class="CoveoQuickview">
