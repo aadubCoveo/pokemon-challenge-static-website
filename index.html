@@ -20,6 +20,13 @@
       rel="stylesheet"
     />
     <script>
+      document.addEventListener("click", musicPlay);
+
+      function musicPlay() {
+        document.getElementById("my-audio-id").play();
+        document.removeEventListener("click", musicPlay);
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
         Coveo.SearchEndpoint.configureCloudV2Endpoint(
           "pokemonapudc3k8172",
@@ -85,6 +92,7 @@
           data-field="@generation"
           data-tab="All"
           data-enable-toggling-operator="true"
+          data-sort-criteria="alphaascending"
           style="background-color: #ff00ff"
         ></div>
         <div
@@ -98,7 +106,7 @@
         <div
           class="CoveoFacet"
           data-title="Types"
-          data-field="@types"
+          data-field="@pokemon_types"
           data-tab="All"
           data-enable-toggling-operator="true"
           style="background-color: #ff00ff"
@@ -182,8 +190,8 @@
             ></span>
             <span
               class="CoveoSort"
-              data-sort-criteria="date descending,date ascending"
-              data-caption="Date"
+              data-sort-criteria="@number_int descending,@number_int ascending"
+              data-caption="Number"
             ></span>
           </div>
         </div>
@@ -205,7 +213,7 @@
               class="coveo-result-frame poke-dot"
               style="background-color: #ff00ff;"
             >
-              <% if(raw.generation == 8) { %>
+              <% if(raw.retro_url_image) { %>
               <span class="center-image" style="background-color: #f47e30;">
                 <img
                   src="https://64.media.tumblr.com/34c880a97d26984628faaf0d272788ff/tumblr_n2rhwe20sK1rcgdmto1_500.gifv"
@@ -219,7 +227,15 @@
                   height="25"
                 />
               </span>
-              <% } %>
+              <% } %> <% if(raw.retro_url_image) { %>
+              <img
+                src="<%- raw.retro_url_image %>"
+                width="128"
+                height="128"
+                onclick="window.open('<%- ClickUri %>', '_blank');"
+                class="center-image"
+              />
+              <% } %> <% if(!raw.retro_url_image) { %>
               <img
                 src="<%- raw.picture_url %>"
                 width="128"
@@ -227,13 +243,12 @@
                 onclick="window.open('<%- ClickUri %>', '_blank');"
                 class="center-image"
               />
+              <% } %>
               <div class="coveo-result-row center-image">
                 <div class="coveo-result-cell">
                   <p class="center-text"><%- raw.name %></p>
                   <p class="center-text">#<%- raw.number %></p>
-                  <p class="center-text">
-                    <%- (raw.types).replace(';', ' & ') %>
-                  </p>
+                  <p class="center-text"><%- (raw.pokemon_types) %></p>
                   <p class="center-text">
                     <i class="fa fa-paw"></i>&nbsp<%- raw.specie %>
                   </p>
@@ -257,5 +272,10 @@
         <div class="CoveoResultsPerPage" style="background-color: white"></div>
       </div>
     </div>
+    <audio
+      src="https://play.pokemonshowdown.com/audio/bw2-kanto-gym-leader.mp3"
+      id="my-audio-id"
+      autoplay
+    ></audio>
   </body>
 </html>
